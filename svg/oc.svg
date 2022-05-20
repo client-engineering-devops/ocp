@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 2436 1125" style="enable-background:new 0 0 2436 1125;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#FF0000;stroke-width:6;stroke-miterlimit:10;}
+	.st1{fill:none;}
+	.st2{fill:#FF0000;}
+	.st3{font-family:'CourierNewPSMT';}
+	.st4{font-size:72px;}
+	.st5{fill:#FFFFFF;stroke:#0000FF;stroke-width:4;stroke-miterlimit:10;}
+	.st6{fill:#0000FF;}
+	.st7{fill:#FFFFFF;stroke:#FF0000;stroke-width:5;stroke-miterlimit:10;}
+	.st8{fill:#FFFFFF;stroke:#0000FF;stroke-width:5;stroke-miterlimit:10;}
+	.st9{fill:none;stroke:#0000FF;stroke-width:5;stroke-miterlimit:10;}
+	.st10{fill:#FFFFFF;stroke:#006837;stroke-width:4;stroke-miterlimit:10;}
+	.st11{fill:#006837;}
+	.st12{font-size:36px;}
+	.st13{fill:none;stroke:#FF0000;stroke-width:5;stroke-miterlimit:10;}
+</style>
+<g id="Project">
+	
+		<rect x="677.05" y="-579.62" transform="matrix(-9.848603e-03 -1 1 -9.848603e-03 664.1628 1790.493)" class="st0" width="1083" height="2292.08"/>
+	<rect x="95.59" y="47.19" class="st1" width="355.08" height="95.7"/>
+	<text transform="matrix(1 0 0 1 121.9093 117.1102)" class="st2 st3 st4">Project</text>
+</g>
+<g id="Namespace">
+	
+		<rect x="751.81" y="-389.08" transform="matrix(-7.264455e-03 -1 1 -7.264455e-03 611.0026 1839.4194)" class="st5" width="933.49" height="2011"/>
+	<rect x="278.3" y="159.05" class="st1" width="413.6" height="95.56"/>
+	<text transform="matrix(1 0 0 1 290.6686 228.8947)" class="st6 st3 st4">Namespace</text>
+</g>
+<g id="Deployment">
+	<rect x="410.14" y="280.4" class="st7" width="825" height="771"/>
+	<rect x="683" y="642.45" class="st8" width="494" height="311"/>
+	<rect x="642" y="681.45" class="st8" width="494" height="311"/>
+	<rect x="598.14" y="718.45" class="st8" width="494" height="311"/>
+	<rect x="608.64" y="749.35" class="st1" width="201" height="95.56"/>
+	<text transform="matrix(1 0 0 1 644.3268 819.1945)" class="st6 st3 st4">Pod</text>
+	<rect x="380.47" y="299.21" class="st1" width="540.17" height="95.7"/>
+	<text transform="matrix(1 0 0 1 434.519 369.1234)" class="st2 st3 st4">Deployment</text>
+	<rect x="506.14" y="473.72" class="st8" width="494" height="136.68"/>
+	<rect x="513.1" y="484.1" class="st1" width="486.54" height="95.56"/>
+	<text transform="matrix(1 0 0 1 518.7301 553.9464)" class="st6 st3 st4">Replica Set</text>
+	<path class="st9" d="M1170,661.45"/>
+	<g>
+		<g>
+			<line class="st9" x1="999.02" y1="722.33" x2="1325.5" y2="469.5"/>
+			<g>
+				<polygon class="st6" points="1015.75,727.75 964,749.45 997.96,704.78 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st9" x1="1160.93" y1="704.23" x2="1325.5" y2="469.5"/>
+			<g>
+				<polygon class="st6" points="1178.51,704.46 1135.5,740.5 1154.72,687.78 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st9" x1="1205.41" y1="608.94" x2="1325.5" y2="469.5"/>
+			<g>
+				<polygon class="st6" points="1222.88,610.91 1176.5,642.5 1200.87,591.95 				"/>
+			</g>
+		</g>
+	</g>
+	<rect x="855.5" y="833.45" class="st10" width="209" height="75"/>
+	<rect x="855.5" y="922.95" class="st10" width="209" height="75"/>
+	<rect x="855.5" y="743.95" class="st10" width="209" height="75"/>
+	<rect x="878.5" y="921.95" class="st1" width="158" height="61.66"/>
+	<text transform="matrix(1 0 0 1 892.6877 963.819)" class="st11 st3 st12">Volume</text>
+	<rect x="894.5" y="751.95" class="st1" width="101" height="57.69"/>
+	<text transform="matrix(1 0 0 1 923.3948 791.8334)" class="st11 st3 st12">IP</text>
+	<rect x="854.5" y="840.95" class="st1" width="210" height="62.69"/>
+	<text transform="matrix(1 0 0 1 862.2825 883.3334)" class="st11 st3 st12">Container</text>
+	<g>
+		<g>
+			<line class="st9" x1="1025.87" y1="960.48" x2="1325" y2="779"/>
+			<g>
+				<polygon class="st6" points="1041.88,967.76 988,983.45 1026.81,942.92 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st9" x1="1129.78" y1="941.78" x2="1325" y2="779"/>
+			<g>
+				<polygon class="st6" points="1146.7,946.59 1095.76,970.15 1128.09,924.28 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st9" x1="1175.01" y1="842.57" x2="1325" y2="779"/>
+			<g>
+				<polygon class="st6" points="1189.8,852.08 1134.22,859.86 1178.46,825.33 				"/>
+			</g>
+		</g>
+	</g>
+</g>
+<g id="Layer_1">
+	<rect x="1325.07" y="469.29" class="st8" width="494" height="131.66"/>
+	<rect x="1344.71" y="479.67" class="st1" width="347.54" height="95.56"/>
+	<text transform="matrix(1 0 0 1 1367.2568 549.5165)" class="st6 st3 st4">Service</text>
+	<rect x="1624.75" y="202.27" class="st7" width="547.75" height="136.68"/>
+	<rect x="1643.71" y="222.65" class="st1" width="501.54" height="95.56"/>
+	<text transform="matrix(1 0 0 1 1656.8428 292.4932)" class="st2 st3 st4">Route (uri)</text>
+	<rect x="1864.11" y="647.28" class="st8" width="308.39" height="131.66"/>
+	<rect x="1836.07" y="657.66" class="st1" width="347.54" height="95.56"/>
+	<text transform="matrix(1 0 0 1 1966.6356 727.5034)" class="st6 st3 st4">PV</text>
+	<path class="st9" d="M1721.61,128"/>
+	<g>
+		<g>
+			<line class="st13" x1="1723.65" y1="488" x2="1871.5" y2="338.5"/>
+			<g>
+				<polygon class="st2" points="1740.94,491.17 1692.5,519.5 1720.29,470.75 				"/>
+			</g>
+		</g>
+	</g>
+	<rect x="1325.07" y="647.06" class="st8" width="494" height="131.66"/>
+	<rect x="1398.07" y="670.44" class="st1" width="347.54" height="95.56"/>
+	<text transform="matrix(1 0 0 1 1507.0321 740.2811)" class="st6 st3 st4">PVC</text>
+	<rect x="639.89" y="1218.72" class="st1" width="0" height="2.78"/>
+	<rect x="1325.55" y="876.09" class="st8" width="494" height="131.66"/>
+	<rect x="1332.52" y="886.47" class="st1" width="434.48" height="95.56"/>
+	<text transform="matrix(1 0 0 1 1355.327 956.312)" class="st6 st3 st4">Configmap</text>
+</g>
+</svg>
