@@ -173,7 +173,7 @@ oc rsh mysql-77c94c9885-k8qg7
 mysql -u user -D testdb -p
 ```
 
-## [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html])
+## project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html])
 ```
 oc new-project pipelines-tutorial
 oc get serviceaccount pipeline
@@ -181,6 +181,23 @@ oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipe
 oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/02_update_deployment_task.yaml
 
 oc create -f pipeline-yaml-file-name.yaml
+
+tkn pipeline start build-and-deploy \
+    -w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.7/01_pipeline/03_persistent_volume_claim.yaml \
+    -p deployment-name=pipelines-vote-api \
+    -p git-url=https://github.com/openshift/pipelines-vote-api.git \
+    -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/pipelines-vote-api \
+    --use-param-defaults
+
+tkn pipeline start build-and-deploy \
+    -w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.7/01_pipeline/03_persistent_volume_claim.yaml \
+    -p deployment-name=pipelines-vote-ui \
+    -p git-url=https://github.com/openshift/pipelines-vote-ui.git \
+    -p IMAGE=image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/pipelines-vote-ui \
+    --use-param-defaults
+
+oc get route pipelines-vote-ui --template='http://{{.spec.host}}'
+
 ```
 
 
