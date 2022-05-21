@@ -1,5 +1,5 @@
 # OCP
-![OCP](https://avatars.githubusercontent.com/u/792337?s=200&v=4) | The [OpenShift Container Platform](https://docs.openshift.com/container-platform/4.10/welcome/index.html) is a hybrid cloud, platform as a service, built around Linux containers. Orchestrated and managed by Kubernetes on a foundation of Red Hat Enterprise Linux. A full-stack automated operations and self-service provisioning for developers. Enabling teams to work together efficiently to move ideas from development into production. 
+![OCP](https://avatars.githubusercontent.com/u/792337?s=200&v=4) | The [OpenShift Container Platform](https://docs.openshift.com/container-platform/4.10/welcome/index.html) is a hybrid cloud, platform as a service, built around Linux containers. Orchestrated and managed by Kubernetes on a foundation of Red Hat Enterprise Linux.
 -----------------------------------|-----------------------------------|
 
 ## resources
