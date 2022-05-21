@@ -1,10 +1,8 @@
 # OCP
-OpenShift Container Platform
-
-![OCP](https://avatars.githubusercontent.com/u/792337?s=200&v=4)
+![OCP](https://avatars.githubusercontent.com/u/792337?s=200&v=4) | The [OpenShift Container Platform](https://docs.openshift.com/container-platform/4.10/welcome/index.html) is a hybrid cloud, platform as a service, built around Linux containers. Orchestrated and managed by Kubernetes on a foundation of Red Hat Enterprise Linux. A full-stack automated operations and self-service provisioning for developers. Enabling teams to work together efficiently to move ideas from development into production. 
+-----------------------------------|-----------------------------------|
 
 ## resources
-defined in OpenShift APIs and stored in etcd database
 `oc api-resources`
 <img src="svg/oc.svg" alt="ocp" width="100%"/>
 
@@ -115,4 +113,74 @@ oc set volume deploy jonwalk-nginx --add --type configmap --configmap-name jonwa
 oc expose deploy jonwalk-nginx --port=8080
 oc expose service/jonwalk-nginx
 oc get deploy jonwalk-nginx -o yaml
+
+oc create deploy jonwalk-mariadb --image=registry.redhat.io/rhscl/mariadb-103-rhel7
+oc logs deployment.apps/jonwalk-mariadb
+oc create configmap jonwalk-mariadb-vars --from-literal=MYSQL_ROOT_PASSWORD=password
+oc describe configmap jonwalk-mariadb-vars
+oc set env deploy jonwalk-mariadb --from=configmap/jonwalk-mariadb-vars
+oc get deploy jonwalk-mariadb -o yaml
+
 ```
+### project 04 - templates
+```
+oc new-project jonwalk-project04 --description='jonwalk project 04 templates'
+
+oc get templates -n openshift | less
+oc get template mariadb-persistent -n openshift -o yaml
+oc process --parameters mariadb-persistent -n openshift
+oc get template mariadb-persistent -o yaml -n openshift > mariadb-persistent.yaml
+oc new-app --template=mariadb-persistent -p MYSQL_USER=jonwalk -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=videos --as-deployment-config
+oc get all
+```
+### project 06 - [wordpress](https://developer.ibm.com/tutorials/build-deploy-wordpress-on-openshift/)
+```
+oc new-project jonwalk-wordpress --description='jonwalk project 06 wordpress'
+
+oc new-app mariadb-persistent
+oc new-app php~https://github.com/wordpress/wordpress
+oc expose service/wordpress
+oc get routes
+```
+## project 07 
+```
+oc new-project jonwalk-postgresql --description='jonwalk project 07 postgresql'
+oc new-app postgresql-ephemeral --name database --param DATABASE_SERVICE_NAME=database --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param POSTGRESQL_PASSWORD=password
+oc rollout status dc/database
+oc get pods --selector name=database
+POD=$(oc get pods --selector name=database -o custom-columns=NAME:.metadata.name --no-headers); echo $POD
+oc rsh $POD
+psql sampledb username
+ \l\
+
+CREATE TABLE COMPANY(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   AGE            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL
+);
+
+\dtables
+
+ \l
+```
+## ## project 08 mysql
+```
+oc new-project jonwalk-mysql --description='jonwalk project 08 mysql'
+oc new-app mysql MYSQL_USER=user MYSQL_PASSWORD=pass MYSQL_DATABASE=testdb -l db=mysql
+oc rsh mysql-77c94c9885-k8qg7 
+mysql -u user -D testdb -p
+```
+
+## [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html])
+```
+oc new-project pipelines-tutorial
+oc get serviceaccount pipeline
+oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/01_apply_manifest_task.yaml
+oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/02_update_deployment_task.yaml
+
+oc create -f pipeline-yaml-file-name.yaml
+```
+
+
