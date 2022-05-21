@@ -173,12 +173,13 @@ oc rsh mysql-77c94c9885-k8qg7
 mysql -u user -D testdb -p
 ```
 
-## project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html])
+## project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)
 ```
 oc new-project pipelines-tutorial
 oc get serviceaccount pipeline
 oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/01_apply_manifest_task.yaml
 oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/02_update_deployment_task.yaml
+oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/04_pipeline.yaml
 
 oc create -f pipeline-yaml-file-name.yaml
 
