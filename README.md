@@ -99,3 +99,20 @@ deployment.apps/jonwalk-deployment01   3/3     3            3           20m
 NAME                                             DESIRED   CURRENT   READY   AGE
 replicaset.apps/jonwalk-deployment01-c6d5fd98b   3         3         3       20m
 ```
+
+### project 02 - new-app
+```
+oc new-project jonwalk-project02 --description='jonwalk project 02'
+oc new-app bitnami/nginx --name app02
+oc expose service/app02
+```
+### project 03 - configmap
+```
+oc new-project jonwalk-project03 --description='jonwalk project 03'
+oc create configmap jonwalk-cm --from-file=index.html
+oc create deploy jonwalk-nginx --image=bitnami/nginx
+oc set volume deploy jonwalk-nginx --add --type configmap --configmap-name jonwalk-cm --mount-path=/app/
+oc expose deploy jonwalk-nginx --port=8080
+oc expose service/jonwalk-nginx
+oc get deploy jonwalk-nginx -o yaml
+```
