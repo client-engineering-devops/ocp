@@ -29,7 +29,7 @@ You don't have any projects. You can try to create a new project, by running
 
     oc new-project <projectname>
 ```
-### Create a new project for yourself.
+### project 01
 `oc new-project -h | less`
 
 `oc new-project jonwalk-project01 --description='jonwalk first project'`
@@ -44,7 +44,7 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
     kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname
 ```
-### Create a deployment with the specified name.
+#### Create a deployment with the specified name.
 
 `oc create deployment -h | less`
 
@@ -142,7 +142,7 @@ oc new-app php~https://github.com/wordpress/wordpress
 oc expose service/wordpress
 oc get routes
 ```
-## project 07 
+### project 07 
 ```
 oc new-project jonwalk-postgresql --description='jonwalk project 07 postgresql'
 oc new-app postgresql-ephemeral --name database --param DATABASE_SERVICE_NAME=database --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param POSTGRESQL_PASSWORD=password
@@ -165,7 +165,7 @@ CREATE TABLE COMPANY(
 
  \l
 ```
-## ## project 08 mysql
+### project 08 mysql
 ```
 oc new-project jonwalk-mysql --description='jonwalk project 08 mysql'
 oc new-app mysql MYSQL_USER=user MYSQL_PASSWORD=pass MYSQL_DATABASE=testdb -l db=mysql
@@ -173,7 +173,7 @@ oc rsh mysql-77c94c9885-k8qg7
 mysql -u user -D testdb -p
 ```
 
-## project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)
+### project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)
 ```
 oc new-project pipelines-tutorial
 oc get serviceaccount pipeline
