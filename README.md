@@ -22,7 +22,7 @@ configmap | ConfigMap holds configuration data for pods to consume. | oc explain
 `source <(oc completion bash)`
 
 `oc login -u developer https://api.crc.testing:6443`
-### Create a new project.
+### ocp-project01
 
 ```
 oc new-project -h | less
