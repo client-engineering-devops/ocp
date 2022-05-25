@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Welcome to jonwalk nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
+<title>ocp-project01</title>
 </head>
 <body>
-<h1>Welcome to jonwalk!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
+<h1>ocp-project01</h1>
+<img src="oc.svg" alt="ocp" width="100%"/>
+<pre>
+oc new-project -h | less
+oc new-project ocp-project01 --description='ocp first project'
+oc create deployment -h | less
+oc create deployment ocp-deployment01 --image=docker.io/bitnami/nginx --replicas=3
+oc get all
 
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
+# pod/ocp-deployment01-76676c57f7-hjxh4   0/1 ContainerCreating   0  11s
+# pod/ocp-deployment01-76676c57f7-j7t2j   0/1 ContainerCreating   0  10s
+# pod/ocp-deployment01-76676c57f7-kt92v   0/1 ContainerCreating   0  10s
 
-<p><em>Thank you for using nginx.</em></p>
+
+oc logs pod/ocp-deployment01-76676c57f7-kt92v -f
+
+oc get all  
+# pod/ocp-deployment01-76676c57f7-hjxh4   1/1 Running   0  2m13s
+# pod/ocp-deployment01-76676c57f7-j7t2j   1/1 Running   0  2m12s
+# pod/ocp-deployment01-76676c57f7-kt92v   1/1 Running   0  2m12s
+
+oc delete pod/ocp-deployment01-6f547f7866-z5fcr
+oc get pods
+# ocp-deployment01-76676c57f7-g6xqw   1/1 Running   0  8s
+# ocp-deployment01-76676c57f7-hjxh4   1/1 Running   0  4m25s
+# ocp-deployment01-76676c57f7-j7t2j   1/1 Running   0  4m24s
+
+oc expose -h | less
+oc expose deploy ocp-deployment01 --port=8080
+oc expose service/ocp-deployment01
+oc get route ocp-deployment01 --template='curl http://{{.spec.host}}'
+
+oc create configmap ocp-cm --from-file=index.html --from-file=svg/oc.svg
+oc set volume deploy ocp-deployment01 --add --type configmap --configmap-name ocp-cm --mount-path=/app/
+oc get all
+# pod/ocp-deployment01-76676c57f7-hjxh4   0/1 Terminating   0  11m
+# pod/ocp-deployment01-76676c57f7-j7t2j   1/1 Terminating   0  11m
+# pod/ocp-deployment01-b8cff445d-nhjzc1/1 Running   0  17s
+# pod/ocp-deployment01-b8cff445d-npw5t1/1 Running   0  12s
+# pod/ocp-deployment01-b8cff445d-rgnjn1/1 Running   0  7s
+
+oc get route ocp-deployment01 --template='curl http://{{.spec.host}}'
+</pre>
+<p><em>Thank you for using ocp.</em></p>
 </body>
 </html>

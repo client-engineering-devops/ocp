@@ -22,117 +22,51 @@ configmap | ConfigMap holds configuration data for pods to consume. | oc explain
 `source <(oc completion bash)`
 
 `oc login -u developer https://api.crc.testing:6443`
-```
-Logged into "https://api.crc.testing:6443" as "developer" using existing credentials.
-
-You don't have any projects. You can try to create a new project, by running
-
-    oc new-project <projectname>
-```
-### project 01
-`oc new-project -h | less`
-
-`oc new-project jonwalk-project01 --description='jonwalk first project'`
-```
-Now using project "jonwalk-project01" on server "https://api.crc.testing:6443".
-
-You can add applications to this project with the 'new-app' command. For example, try:
-
-    oc new-app rails-postgresql-example
-
-to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
-
-    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname
-```
-#### Create a deployment with the specified name.
-
-`oc create deployment -h | less`
-
-`oc create deployment jonwalk-deployment01 --image=bitnami/nginx --replicas=3`
-```
-deployment.apps/jonwalk-deployment01 created
-```
-`oc get all`
-```
-NAME                                       READY   STATUS    RESTARTS   AGE
-pod/jonwalk-deployment01-c6d5fd98b-6zv8w   1/1     Running   0          33s
-pod/jonwalk-deployment01-c6d5fd98b-ftp5z   1/1     Running   0          33s
-pod/jonwalk-deployment01-c6d5fd98b-sz2fk   1/1     Running   0          33s
-
-NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/jonwalk-deployment01   3/3     3            3           34s
-
-NAME                                             DESIRED   CURRENT   READY   AGE
-replicaset.apps/jonwalk-deployment01-c6d5fd98b   3         3         3       33s
-```
-`oc delete pod/jonwalk-deployment01-c6d5fd98b-6zv8w`
-```
-pod "jonwalk-deployment01-c6d5fd98b-6zv8w" deleted
-```
-`oc get all`
-```
-NAME                                       READY   STATUS              RESTARTS   AGE
-pod/jonwalk-deployment01-c6d5fd98b-b4snm   0/1     ContainerCreating   0          4s
-pod/jonwalk-deployment01-c6d5fd98b-ftp5z   1/1     Running             0          18m
-pod/jonwalk-deployment01-c6d5fd98b-sz2fk   1/1     Running             0          18m
-
-NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/jonwalk-deployment01   2/3     3            2           18m
-
-NAME                                             DESIRED   CURRENT   READY   AGE
-replicaset.apps/jonwalk-deployment01-c6d5fd98b   3         3         2       18m
+### Create a new project.
 
 ```
-
-`oc get all`
-```
-NAME                                       READY   STATUS    RESTARTS   AGE
-pod/jonwalk-deployment01-c6d5fd98b-b4snm   1/1     Running   0          92s
-pod/jonwalk-deployment01-c6d5fd98b-ftp5z   1/1     Running   0          20m
-pod/jonwalk-deployment01-c6d5fd98b-sz2fk   1/1     Running   0          20m
-
-NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/jonwalk-deployment01   3/3     3            3           20m
-
-NAME                                             DESIRED   CURRENT   READY   AGE
-replicaset.apps/jonwalk-deployment01-c6d5fd98b   3         3         3       20m
-```
-
-### project 02 - new-app
-```
-oc new-project jonwalk-project02 --description='jonwalk project 02'
-oc new-app bitnami/nginx --name app02
-oc expose service/app02
-```
-### project 03 - configmap
-```
-oc new-project jonwalk-project03 --description='jonwalk project 03'
-oc create configmap jonwalk-cm --from-file=index.html
-oc create deploy jonwalk-nginx --image=bitnami/nginx
-oc set volume deploy jonwalk-nginx --add --type configmap --configmap-name jonwalk-cm --mount-path=/app/
-oc expose deploy jonwalk-nginx --port=8080
-oc expose service/jonwalk-nginx
-oc get deploy jonwalk-nginx -o yaml
-
-oc create deploy jonwalk-mariadb --image=registry.redhat.io/rhscl/mariadb-103-rhel7
-oc logs deployment.apps/jonwalk-mariadb
-oc create configmap jonwalk-mariadb-vars --from-literal=MYSQL_ROOT_PASSWORD=password
-oc describe configmap jonwalk-mariadb-vars
-oc set env deploy jonwalk-mariadb --from=configmap/jonwalk-mariadb-vars
-oc get deploy jonwalk-mariadb -o yaml
-
-```
-### project 04 - templates
-```
-oc new-project jonwalk-project04 --description='jonwalk project 04 templates'
-
-oc get templates -n openshift | less
-oc get template mariadb-persistent -n openshift -o yaml
-oc process --parameters mariadb-persistent -n openshift
-oc get template mariadb-persistent -o yaml -n openshift > mariadb-persistent.yaml
-oc new-app --template=mariadb-persistent -p MYSQL_USER=jonwalk -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=videos --as-deployment-config
+oc new-project -h | less
+oc new-project ocp-project01 --description='ocp first project'
+oc create deployment -h | less
+oc create deployment ocp-deployment01 --image=docker.io/bitnami/nginx --replicas=3
 oc get all
+
+# pod/ocp-deployment01-76676c57f7-hjxh4   0/1     ContainerCreating   0          11s
+# pod/ocp-deployment01-76676c57f7-j7t2j   0/1     ContainerCreating   0          10s
+# pod/ocp-deployment01-76676c57f7-kt92v   0/1     ContainerCreating   0          10s
+
+
+oc logs pod/ocp-deployment01-76676c57f7-kt92v -f
+
+oc get all                                      
+# pod/ocp-deployment01-76676c57f7-hjxh4   1/1     Running   0          2m13s
+# pod/ocp-deployment01-76676c57f7-j7t2j   1/1     Running   0          2m12s
+# pod/ocp-deployment01-76676c57f7-kt92v   1/1     Running   0          2m12s
+
+oc delete pod/ocp-deployment01-6f547f7866-z5fcr
+oc get pods
+# ocp-deployment01-76676c57f7-g6xqw   1/1     Running   0          8s
+# ocp-deployment01-76676c57f7-hjxh4   1/1     Running   0          4m25s
+# ocp-deployment01-76676c57f7-j7t2j   1/1     Running   0          4m24s
+
+oc expose -h | less
+oc expose deploy ocp-deployment01 --port=8080
+oc expose service/ocp-deployment01
+oc get route ocp-deployment01 --template='curl http://{{.spec.host}}'
+
+oc create configmap ocp-cm --from-file=index.html --from-file=svg/oc.svg
+oc set volume deploy ocp-deployment01 --add --type configmap --configmap-name ocp-cm --mount-path=/app/
+oc get all
+# pod/ocp-deployment01-76676c57f7-hjxh4   0/1     Terminating   0          11m
+# pod/ocp-deployment01-76676c57f7-j7t2j   1/1     Terminating   0          11m
+# pod/ocp-deployment01-b8cff445d-nhjzc    1/1     Running       0          17s
+# pod/ocp-deployment01-b8cff445d-npw5t    1/1     Running       0          12s
+# pod/ocp-deployment01-b8cff445d-rgnjn    1/1     Running       0          7s
+
+oc get route ocp-deployment01 --template='curl http://{{.spec.host}}'
+
 ```
+
 ### project 06 - [wordpress](https://developer.ibm.com/tutorials/build-deploy-wordpress-on-openshift/)
 ```
 oc new-project jonwalk-wordpress --description='jonwalk project 06 wordpress'
@@ -142,7 +76,7 @@ oc new-app php~https://github.com/wordpress/wordpress
 oc expose service/wordpress
 oc get routes
 ```
-### project 07 
+## project 07 
 ```
 oc new-project jonwalk-postgresql --description='jonwalk project 07 postgresql'
 oc new-app postgresql-ephemeral --name database --param DATABASE_SERVICE_NAME=database --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param POSTGRESQL_PASSWORD=password
@@ -165,7 +99,7 @@ CREATE TABLE COMPANY(
 
  \l
 ```
-### project 08 mysql
+## ## project 08 mysql
 ```
 oc new-project jonwalk-mysql --description='jonwalk project 08 mysql'
 oc new-app mysql MYSQL_USER=user MYSQL_PASSWORD=pass MYSQL_DATABASE=testdb -l db=mysql
@@ -173,7 +107,7 @@ oc rsh mysql-77c94c9885-k8qg7
 mysql -u user -D testdb -p
 ```
 
-### project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)
+## project 09 [pipelines-tutorial](https://docs.openshift.com/container-platform/4.8/cicd/pipelines/creating-applications-with-cicd-pipelines.html)
 ```
 oc new-project pipelines-tutorial
 oc get serviceaccount pipeline
@@ -200,5 +134,7 @@ tkn pipeline start build-and-deploy \
 oc get route pipelines-vote-ui --template='http://{{.spec.host}}'
 
 ```
+
+
 
 
