@@ -5,13 +5,17 @@ const serverPort = "8080";
 
 
 app.get('/', (req, res) => {
-    res.send("zDemo");
+    res.send("fibonacci");
+});
+
+app.get('/ping', (req, res) => {
+    res.send("1");
 });
 
 app.get('/fibonacci', (req, res) => {
     console.log(req.query);
-    var count = Object.values(req.query);
-    var bigNumber = fibonacci.iterate(count);
+    var i = Object.values(req.query);
+    var bigNumber = fibonacci.iterate(i);
     res.send(bigNumber);
 });
 
