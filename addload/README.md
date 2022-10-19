@@ -20,7 +20,7 @@ git@github.com:client-engineering-devops/ocp.git
 ## Node
 If you want to run node locally
 ```
-cd autoload/app-src
+cd addload/app-src
 npm install
 npm start
 ```

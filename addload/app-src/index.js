@@ -1,11 +1,11 @@
 const express = require('express')
 const fibonacci = require('fibonacci')
+const path = require('path')
 const app = express()
 const serverPort = "8080";
 
-
 app.get('/', (req, res) => {
-    res.send("fibonacci");
+    res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 app.get('/ping', (req, res) => {
