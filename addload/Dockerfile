@@ -9,7 +9,7 @@ ADD app-src $HOME
 RUN npm install
 
 # Second stage copies the application to the minimal image
-FROM registry.redhat.io/ubi8/nodejs-16-minimal
+FROM registry.redhat.io/rhel8/nodejs-16-minimal
 
 # Copy the application source and build artifacts from the builder image to this one
 COPY --from=builder $HOME $HOME
