@@ -25,32 +25,57 @@ npm install
 npm start
 ```
 ## Openshift
+
+### Set some environment variables
 ```
-oc new-project addload
-oc new-app https://github.com/client-engineering-devops/ocp \
+PROJECT="autoscale"
+GIT_REPO="https://github.com/client-engineering-devops/ocp.git"
+RSA_SECRET="$HOME/.ssh/rsa-pull-secret.yaml"
+```
+### Do you have your rsa-pull-secret?
+[Registry Service Account](rsa.md) secret is required to pull registry.redhat.io/rhel8/nodejs-16
+```
+[ ! -f ${RSA_SECRET} ] && less rsa.md
+```
+### Create project, pipeline, rsa-pull-secret
+```
+oc new-project ${PROJECT}
+oc create sa pipeline
+oc policy add-role-to-user edit system:serviceaccount:${PROJECT}:pipeline
+oc create -f ${RSA_SECRET}
+oc secrets link builder rsa-pull-secret
+```
+### Import registry.redhat.io/rhel8/nodejs-16
+```
+oc import-image rhel8/nodejs-16 --from=registry.redhat.io/rhel8/nodejs-16 --confirm
+```
+
+### Create fibonacci app
+```
+oc new-app nodejs-16:latest~${GIT_REPO} \
   --context-dir=addload/app-src \
-  --name=addload \
-  --strategy=source 
-
-oc expose service/addload
-fibonacci=`oc get route.route.openshift.io/addload --template='http://{{.spec.host}}/fibonacci?i='` 
-curl -sX GET $fibonacci+500
-
+  --name=fibonacci 
+oc create route edge cause --service=fibonacci --port=8080
 ```
-## autoscale
+### Set resources and hpa
 ```
-oc autoscale deployment/addload --min=1 --max=10 --cpu-percent=50
+oc set resources deployment.apps/fibonacci --limits=cpu=100m,memory=150Mi --requests=cpu=10m,memory=35Mi
+oc autoscale deployment/fibonacci --min=1 --max=30 --cpu-percent=50
 oc describe hpa
 ```
-## loop
+
+### Curl the fibonacci endpoint
 ```
-for iterations in {2000..5000..100}
+fibonacci=`oc get route.route.openshift.io/cause --template='https://{{.spec.host}}/fibonacci?i='` 
+curl -sX GET $fibonacci+500
+```
+### Loop to trigger autoscale 
+```
+for iterations in {1000..5000..100}
 do
    curl -sX GET "$fibonacci$iterations" |jq
    echo
    oc get hpa
-   echo
-   oc get pods
    echo
    oc get podmetrics
 done
